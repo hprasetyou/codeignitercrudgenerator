@@ -1,0 +1,54 @@
+
+{% extends "dashboard.html" %}
+{% set title=" Survey " %}
+{% if Survey %}
+	 {% set bc_text = Survey.id  %}
+{% else %}
+	 {% set bc_text = res.string.new %}
+{% endif %}
+{% set breadcrumbs = [
+	{'link': base_url~'index.php/manage_surveys','text': res.string.survey },
+	{'link':'#','text':bc_text  }]
+%}
+{% block content %}
+<div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<form id="form_Survey" method="post" action="/index.php/back/admin/manage_surveys/write/{{ Survey.id }}" data-parsley-validate class="form-horizontal form-label-left">
+			<div class="box box-info">
+				<div class="box-header with-border">
+				{% include 'common/_form_header.html'
+				with {'back_url':'/index.php/manage_surveys'~back_link,
+				'title': res.string.survey,
+				'delete_url':'/index.php/manage_surveys/delete/' ~ Survey.Id,
+				'object':Survey} %}
+				</div>
+				<div class="box-body">
+				<div class="col-sm-12">
+					{% include "admin/admin/surveys/_detail.html" %}
+					<hr>
+				</div>
+				<div class="col-sm-12">
+					{% include "admin/admin/surveys/_survey_officers.html" %}
+										<hr>
+				</div>
+				<div class="col-sm-12">
+					{% include "admin/admin/surveys/_survey_images.html" %}
+										<hr>
+				</div>
+				<div class="col-sm-12">
+					{% include "admin/admin/surveys/_survey_result.html" %}
+										<hr>
+				</div>
+
+
+				</div>
+		</form>
+	</div>
+</div>
+<!-- Modal -->
+
+{% endblock %}
+{% block bottom%}
+<script src="/public/assets/survey_form.js" type="text/javascript">
+</script>
+{% endblock %}

@@ -1,0 +1,22 @@
+<h3 class="box-title"> {{title}} {% if object %} - {{ object.Name }} {% if object.state %}( {{object.state}} ){% endif%}{% endif%} </h3>
+<a href="{{form_back_link()}}" class="btn btn-back btn-default pull-right">{{res.string.back}}</a>
+{% if object  %}
+  {% if check_access('write')%}
+  {% if object.State not in ['accepted'] %}
+  <a href="#" class="btn btn-danger pull-right" data-url="{{delete_url}}" id="btn-delete" data-target="#deleteModal"><i class="fa fa-trash-o"></i> {{res.string.delete}}</a>
+  <a href="#" class="btn btn-primary pull-right" id="btn-edit"><i class="fa fa-edit"></i> {{res.string.edit}}</a>
+  <a href="#" style="display:none" class="btn btn-primary pull-right" id="btn-canceledit">{{res.string.cancel}}</a>
+  {% endif %}
+  {% if email %}
+  <a href="{{email}}" class="btn btn-default pull-right"><i class="fa fa-envelope"></i> {{res.string.send_email}}</a>
+  {% endif %}
+  {% if object.Status == 'pending' %}
+  <a id="btnConfirm" href="#" class="btn pull-right btn-default" data-toggle="modal" data-target="#confirmModal"><i class="fa fa-check"></i>{{res.string.confirm}}</a>
+  {% endif %}
+  {% for button in ebuttons %}
+    {{ button | raw}}
+  {% endfor %}
+
+  {% endif %}
+  {% endif %}
+<button type="submit" {% if object %}style="display:none"{% endif %}  name="button" class="btn btn-success pull-right" id="btn-save"><i class="fa fa-save"></i> {{res.string.save}}</button>

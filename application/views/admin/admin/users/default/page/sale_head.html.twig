@@ -1,0 +1,13 @@
+{% block _web_catalog_menu_second_level_sale_head_widget %}
+    {% set label = 'On Sale' %}
+    {% set content %}
+        <li class="main-menu-column__item">
+            <a class="main-menu-column__link" href="#">
+                <img class="main-menu-column__image"
+                     src="{% image '@B2BBundle/Resources/public/themes/customtheme/images/quickship-2.jpg' %}{{ asset_url }}{% endimage %}
+                ">
+            </a>
+        </li>
+    {% endset %}
+    {{ block('_web_catalog_menu_second_level_column') }}
+{% endblock %}

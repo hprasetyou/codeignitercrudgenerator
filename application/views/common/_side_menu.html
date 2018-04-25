@@ -1,0 +1,19 @@
+
+<ul class="sidebar-menu" data-widget="tree">
+  <li class="header">{{res.string.menu}}</li>
+  {% for parentmenu in res.session.access %}
+  <li class="treeview">
+    <a href="#">
+      <i class="fa {{parentmenu.icon}}"></i> <span>{{ attribute(res.string,parentmenu.Name)}}</span>
+      <span class="pull-right-container">
+        <i class="fa fa-angle-left pull-right"></i>
+      </span>
+    </a>
+    <ul class="treeview-menu">
+      {% for menu in parentmenu.Child %}
+      <li><a href="/index.php/{{menu.Url}}"><i class="fa {{menu.icon}}"></i> {{attribute(res.string,menu.Name)}}</a></li>
+      {% endfor %}
+    </ul>
+  </li>
+  {% endfor %}
+</ul>

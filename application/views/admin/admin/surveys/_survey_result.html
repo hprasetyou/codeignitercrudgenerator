@@ -1,0 +1,9 @@
+<div class="form-group">
+	<label for="SurveyResult">{{res.string.survey_result}}</label>
+	<div {% if Survey %}style="display:none"{% endif %} class="input-wrap">
+		<textarea name="SurveyResult" class="form-control summernote col-md-12 col-xs-12" id="SurveyResult">{{Survey.SurveyResult}}</textarea>
+	</div>
+	{% if Survey %}
+		<div class="control-value">{{ Survey.SurveyResult | raw}}</div>
+	{% endif %}
+</div>

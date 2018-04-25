@@ -1,0 +1,5 @@
+styles:
+    inputs:
+        - 'bundles/b2b/default/css/custom_frontend.css'
+        - 'bundles/b2b/default/scss/custom_frontend.scss'
+        - 'bundles/oroform/default/scss/settings/global-settings.scss': 'bundles/b2b/default/scss/settings/global-settings.scss'

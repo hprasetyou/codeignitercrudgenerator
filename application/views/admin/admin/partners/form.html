@@ -1,0 +1,178 @@
+
+{% extends "dashboard.html" %}
+{% set title=" Partner " %}
+{% if partners %}
+	 {% set bc_text = partners.id  %}
+{% else %}
+	 {% set bc_text = res.string.new %}
+{% endif %}
+{% set breadcrumbs = [
+	{'link': base_url~'index.php/manage_partners','text': res.string.partner },
+	{'link':'#','text':bc_text  }]
+%}
+{% block content %}
+<div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<form id="form_Partner" method="post" action="/index.php/manage_partners/write/{{ Partner.id }}" data-parsley-validate class="form-horizontal form-label-left">
+			<div class="box box-info">
+				<div class="box-header with-border">
+				{% include 'common/_form_header.html'
+				with {'back_url':'/index.php/manage_partners'~back_link,
+				'title': res.string.partner,
+				'delete_url':'/index.php/manage_partners/delete/' ~ partners.Id,
+				'object':partners} %}
+				</div>
+				<div class="box-body">
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="IdNumber">{{res.string.id_number}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if partners %}style="display:none"{% endif %} class="input-wrap">
+							<input type="text" placeholder="{{ res.string.id_number }}" id="IdNumber" value="{{ Partner.IdNumber }}"
+							name="IdNumber"  class="form-control  col-md-7 col-xs-12">
+						</div>
+								{% if partners %}
+									<p class="control-value">{{ partners.IdNumber  }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="IdType">{{res.string.id_type}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if partners %}style="display:none"{% endif %} class="input-wrap">
+							<input type="text" placeholder="{{ res.string.id_type }}" id="IdType" value="{{ Partner.IdType }}"
+							name="IdType"  class="form-control  col-md-7 col-xs-12">
+						</div>
+								{% if partners %}
+									<p class="control-value">{{ partners.IdType  }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Name">{{res.string.name}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if partners %}style="display:none"{% endif %} class="input-wrap">
+							<input type="text" placeholder="{{ res.string.name }}" id="Name" value="{{ Partner.Name }}"
+							name="Name" required="required" class="form-control  col-md-7 col-xs-12">
+						</div>
+								{% if partners %}
+									<p class="control-value">{{ partners.Name  }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Email">{{res.string.email}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if partners %}style="display:none"{% endif %} class="input-wrap">
+							<input type="text" placeholder="{{ res.string.email }}" id="Email" value="{{ Partner.Email }}"
+							name="Email"  class="form-control  col-md-7 col-xs-12">
+						</div>
+								{% if partners %}
+									<p class="control-value">{{ partners.Email  }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Phone">{{res.string.phone}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if partners %}style="display:none"{% endif %} class="input-wrap">
+							<input type="text" placeholder="{{ res.string.phone }}" id="Phone" value="{{ Partner.Phone }}"
+							name="Phone"  class="form-control  col-md-7 col-xs-12">
+						</div>
+								{% if partners %}
+									<p class="control-value">{{ partners.Phone  }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Website">{{res.string.website}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if partners %}style="display:none"{% endif %} class="input-wrap">
+							<input type="text" placeholder="{{ res.string.website }}" id="Website" value="{{ Partner.Website }}"
+							name="Website"  class="form-control  col-md-7 col-xs-12">
+						</div>
+								{% if partners %}
+									<p class="control-value">{{ partners.Website  }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Image">{{res.string.image}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if partners %}style="display:none"{% endif %} class="input-wrap">
+							<input type="text" placeholder="{{ res.string.image }}" id="Image" value="{{ Partner.Image }}"
+							name="Image"  class="form-control  col-md-7 col-xs-12">
+						</div>
+								{% if partners %}
+									<p class="control-value">{{ partners.Image  }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Address">{{res.string.address}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if partners %}style="display:none"{% endif %} class="input-wrap">
+							<input type="text" placeholder="{{ res.string.address }}" id="Address" value="{{ Partner.Address }}"
+							name="Address"  class="form-control  col-md-7 col-xs-12">
+						</div>
+								{% if partners %}
+									<p class="control-value">{{ partners.Address  }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Remark">{{res.string.remark}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if partners %}style="display:none"{% endif %} class="input-wrap">
+							<input type="text" placeholder="{{ res.string.remark }}" id="Remark" value="{{ Partner.Remark }}"
+							name="Remark"  class="form-control  col-md-7 col-xs-12">
+						</div>
+								{% if partners %}
+									<p class="control-value">{{ partners.Remark  }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="CompanyId">{{res.string.company_id}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if partners %}style="display:none"{% endif %} class="input-wrap">
+							<input type="text" placeholder="{{ res.string.company_id }}" id="CompanyId" value="{{ Partner.CompanyId }}"
+							name="CompanyId"  class="form-control  col-md-7 col-xs-12">
+						</div>
+								{% if partners %}
+									<p class="control-value">{{ partners.CompanyId  }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Active">{{res.string.active}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if partners %}style="display:none"{% endif %} class="input-wrap">
+							<input type="checkbox" placeholder="{{ res.string.active }}" id="Active" value="{{ Partner.Active }}"
+							name="Active"  class="form-control  col-md-7 col-xs-12">
+						</div>
+								{% if partners %}
+									<p class="control-value">{{ partners.Active  }}</p>
+								{% endif %}
+							</div>
+						</div>
+				</div>
+		</form>
+	</div>
+</div>
+<!-- Modal -->
+
+{% endblock %}
+{% block bottom%}
+
+{% endblock %}

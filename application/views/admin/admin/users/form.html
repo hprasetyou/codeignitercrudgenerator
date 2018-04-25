@@ -1,0 +1,147 @@
+
+{% extends "dashboard.html" %}
+{% set title=" User " %}
+{% if User%}
+	 {% set bc_text = User.id  %}
+{% else %}
+	 {% set bc_text = res.string.new %}
+{% endif %}
+{% set breadcrumbs = [
+	{'link': base_url~'index.php/back/admin/manage_users','text': res.string.user },
+	{'link':'#','text':bc_text  }]
+%}
+{% block content %}
+<div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<form id="form_User" method="post" action="/index.php/manage_users/write/{{ User.Id }}" data-parsley-validate class="form-horizontal form-label-left">
+			<div class="box box-info">
+				<div class="box-header with-border"
+				{% include 'common/_form_header.html'
+				with {'back_url':'/index.php/manage_user'~back_link,
+				'title': res.string.user,
+				'delete_url':'/index.php/manage_User.delete/' ~ User.Id,
+				"object":User} %}
+				<a href="#" class="btn btn-default pull-right" data-toggle="modal" data-target="#ChangePasswordModal">{{res.string.change_password}}</a>
+
+				</div>
+				<div class="box-body">
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="IdNumber">{{res.string.nip}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if User.Partner %}style="display:none"{% endif %} class="input-wrap">
+							<input type="text" placeholder="{{ res.string.nip }}" id="IdNumber" value="{{ User.Partner.IdNumber }}"
+							name="IdNumber"  class="form-control  col-md-7 col-xs-12">
+						</div>
+								{% if User.Partner.IdNumber %}
+									<p class="control-value">{{ User.Partner.IdNumber  }}</p>
+								{% endif %}
+							</div>
+						</div>
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Name">{{res.string.name}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if User.Partner %}style="display:none"{% endif %} class="input-wrap">
+							<input type="text" placeholder="{{ res.string.name }}" id="Name" value="{{ User.Partner.Name }}"
+							name="Name" required="required" class="form-control  col-md-7 col-xs-12">
+						</div>
+								{% if User.Partner %}
+									<p class="control-value">{{ User.Partner.Name  }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Email">{{res.string.email}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if User.Partner %}style="display:none"{% endif %} class="input-wrap">
+							<input type="text" placeholder="{{ res.string.email }}" id="Email" value="{{ User.Partner.Email }}"
+							name="Email"  class="form-control  col-md-7 col-xs-12">
+						</div>
+								{% if User.Partner %}
+									<p class="control-value">{{ User.Partner.Email  }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Phone">{{res.string.phone}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if User.Partner %}style="display:none"{% endif %} class="input-wrap">
+							<input type="text" placeholder="{{ res.string.phone }}" id="Phone" value="{{ User.Partner.Phone }}"
+							name="Phone"  class="form-control  col-md-7 col-xs-12">
+						</div>
+								{% if User.Partner %}
+									<p class="control-value">{{ User.Partner.Phone  }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+						<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Address">{{res.string.address}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if User.Partner %}style="display:none"{% endif %} class="input-wrap">
+							<input type="text" placeholder="{{ res.string.address }}" id="Address" value="{{ User.Partner.Address }}"
+							name="Address"  class="form-control  col-md-7 col-xs-12">
+						</div>
+								{% if User.Partner %}
+									<p class="control-value">{{ User.Partner.Address  }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Remark">{{res.string.position}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if User.Partner %}style="display:none"{% endif %} class="input-wrap">
+							<input type="text" placeholder="{{ res.string.remark }}" id="Remark" value="{{ User.Partner.Remark }}"
+							name="Remark"  class="form-control  col-md-7 col-xs-12">
+						</div>
+								{% if User.Partner %}
+									<p class="control-value">{{ User.Partner.Remark  }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Name">{{res.string.name}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if User %}style="display:none"{% endif %} class="input-wrap">
+							<input type="text" placeholder="{{ res.string.name }}" id="Name" value="{{ User.Name }}"
+							name="Name" required="required" class="form-control  col-md-7 col-xs-12">
+						</div>
+								{% if User %}
+									<p class="control-value">{{ User.Name  }}</p>
+								{% endif %}
+							</div>
+						</div>
+					{% if not User %}
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Password">{{res.string.password}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if User %}style="display:none"{% endif %} class="input-wrap">
+							<input type="text" placeholder="{{ res.string.password }}" id="Password" value="{{ User.Password }}"
+							name="Password"  class="form-control  col-md-7 col-xs-12">
+						</div>
+							</div>
+						</div>
+					{% endif %}
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Role">{{res.string.group}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if User %}style="display:none"{% endif %} class="input-wrap">
+							{{selection_m2o('Group','Group',User.Group) | raw}}
+						</div>
+								{% if User %}
+									<p class="control-value">{{ User.Group  }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+				</div>
+		</form>
+	</div>
+</div>
+{% endblock %}
+{% block bottom%}
+{% include 'admin/admin/users/_modal_change_password.html' %}
+{% endblock %}

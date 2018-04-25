@@ -1,0 +1,34 @@
+ {% extends "dashboard.html" %} {% set title=" Configuration " %} {% if Configuration %} {% set bc_text = Configuration.Name %} {% else %} {% set bc_text = res.string.new %} {% endif %} {% set breadcrumbs = [ {'link': base_url~'index.php/back/admin/manage_configurations','text':
+res.string.configuration }, {'link':'#','text':bc_text }] %} {% block content %}
+<div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<form id="form_Configuration" method="post" action="/index.php/back/admin/manage_configurations/write/{{ Configuration.id }}" data-parsley-validate class="form-horizontal form-label-left">
+			<div class="box box-info">
+				<div class="box-header with-border">
+					{% include 'common/_form_header.html' with {'back_url':'/index.php/manage_configurations'~back_link, 'title': res.string.configuration, 'delete_url':'/index.php/manage_configurations/delete/' ~ Configurations.Id, 'object':Configuration} %}
+				</div>
+				<div class="box-body">
+					<blockquote>
+						{{Configuration.Description}}
+					</blockquote>
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="DataValue">{{res.string.data_value}}</label>
+						<div class="col-md-8 col-sm-8 col-xs-12">
+							<div {% if Configuration %}style="display:none" {% endif %} class="input-wrap">
+								{% if Configuration.Type == "content" %}
+								<textarea name="DataValue" id="DataValue" class="summernote" rows="8" cols="80">{{Configuration.DataValue}}</textarea> {% else %}
+								<input type="text" placeholder="{{ res.string.data_value }}" id="DataValue" value="{{ Configuration.DataValue }}" name="DataValue" class="form-control  col-md-7 col-xs-12"> {% endif %}
+							</div>
+							{% if Configuration %}
+							<div class="control-value">{{ Configuration.DataValue | raw }}</div>
+							{% endif %}
+						</div>
+					</div>
+
+				</div>
+		</form>
+		</div>
+	</div>
+	<!-- Modal -->
+
+	{% endblock %} {% block bottom%} {% endblock %}

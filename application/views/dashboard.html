@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> {{title?title:'Dashboard'}}</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+  <link rel="stylesheet" href="/public/assets/main.css">
+  <!-- Google Font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+
+<body class="hold-transition skin-red-light sidebar-mini">
+  <div class="wrapper">
+    <header class="main-header">
+      <!-- Logo -->
+      <a href="#" class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini">Dashboard</span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg">
+          <b>LOGO</b>
+        </span>
+      </a>
+      <!-- Header Navbar: style can be found in header.less -->
+      <nav class="navbar navbar-static-top">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+          <span class="sr-only">Toggle navigation</span>
+        </a>
+
+        <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+            <!-- User Account: style can be found in dropdown.less -->
+            <li class="dropdown user user-menu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <img src="{% if res.session.uid.Partner.Image %}{{res.session.uid.Partner.Image}}{% else %}/public/upload/images/default-thumbnail.jpg{% endif %}"
+                  class="user-image" alt="User Image">
+                <span class="hidden-xs">{{res.session.uid.Partner.Name}}</span>
+              </a>
+              <ul class="dropdown-menu">
+                <!-- User image -->
+                <li class="user-header">
+                  <img src="{% if res.session.uid.Partner.Image %}{{res.session.uid.Partner.Image}}{% else %}/public/upload/images/default-thumbnail.jpg{% endif %}"
+                    class="img-circle" alt="User Image">
+                  <p>
+                    {{res.session.uid.Partner.Name}} - {% for group in res.session.uid.Groups %}{{group.Name}}{% endfor %}
+                  </p>
+                </li>
+                <!-- Menu Footer-->
+                <li class="user-footer">
+
+
+                  <div class="">
+                      <a href="/index.php/auth/change_password" class="btn btn-default">{{res.string.change_password}}</a>
+                    <a href="/index.php/auth/do_logout" class="btn pull-right btn-default">{{res.string.logout}}</a>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+      <!-- sidebar: style can be found in sidebar.less -->
+      <section class="sidebar">
+        <!-- search form -->
+        <!-- <form action="#" method="get" class="sidebar-form">
+          <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Search...">
+            <span class="input-group-btn">
+              <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                <i class="fa fa-search"></i>
+              </button>
+            </span>
+          </div>
+        </form> -->
+        <!-- /.search form -->
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+
+        {% include 'common/_side_menu.html'%}
+      </section>
+      <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>
+          Dashboard
+        </h1>
+
+        <ol class="breadcrumb">
+          {% for breadcrumb in breadcrumbs %}
+          <li {% if breadcrumb.link=='#' %} class="active">{{breadcrumb.text}}{% else %}>
+            <a href="{{breadcrumb.link}}">{{breadcrumb.text}}</a>{% endif %}</li>
+          {% endfor %}
+        </ol>
+      </section>
+
+      <!-- Main content -->
+      <section class="content">
+        {% if res.info %} {% include "common/_alert_info.html" %} {% endif %} {% block content%} {% endblock %}
+      </section>
+      <!-- /.content -->
+    </div>
+
+    <div class="control-sidebar-bg"></div>
+  </div>
+  <!-- ./wrapper -->
+  <script type="text/javascript" src="/public/assets/main.js"></script>
+
+  {% include 'common/_delete_modal.html'%} {% include 'common/_confirmation_modal.html'%}
+  {% block bottom %}
+  {% endblock %}
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLAUAl9I8nQgR3ogoTRGb-guPc_UhuMZ0&callback=initMap" async defer></script>
+
+</body>
+
+</html>

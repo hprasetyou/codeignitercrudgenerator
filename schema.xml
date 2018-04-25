@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database name="default" defaultIdMethod="native" defaultPhpNamingMethod="underscore">
+  <table name="user" idMethod="native" phpName="User">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="name" phpName="Name" type="VARCHAR" size="255" required="true"/>
+    <column name="password" phpName="Password" type="VARCHAR" size="255"/>
+    <column name="role" phpName="Role" type="CHAR" sqlType="ENUM('admin','applicant')"/>
+    <column name="partner_id" phpName="PartnerId" type="INTEGER"/>
+    <column name="last_login" phpName="LastLogin" type="TIMESTAMP"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP" required="true"/>
+    <foreign-key foreignTable="partner" phpName="Partner">
+      <reference local="partner_id" foreign="id"/>
+    </foreign-key>
+    <behavior name="delegate">
+      <parameter name="to" value="partner"/>
+    </behavior>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="activity" idMethod="native" phpName="Activity">
+    <column name="uuid" phpName="Uuid" type="VARCHAR" size="255" primaryKey="true" required="true"/>
+    <column name="user_id" phpName="UserId" type="INTEGER"/>
+    <column name="object" phpName="Object" type="VARCHAR" size="255" required="true"/>
+    <column name="object_id" phpName="ObjectId" type="INTEGER" required="true"/>
+    <column name="description" phpName="Description" type="LONGVARCHAR" />
+    <column name="active" phpName="Active" type="BOOLEAN" defaultValue="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP" />
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP" required="true"/>
+    <foreign-key foreignTable="user">
+      <reference local="user_id" foreign="id"/>
+    </foreign-key>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="applicant" idMethod="native" phpName="Applicant">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="name" phpName="Name" type="VARCHAR" size="255" required="true"/>
+    <column name="email" phpName="Email" type="VARCHAR" size="255"/>
+    <column name="id_number" phpName="IdNumber" type="VARCHAR" size="255" required="true"/>
+    <column name="gender" phpName="Gender" type="CHAR" sqlType="ENUM('m','f')"/>
+    <column name="position" phpName="Position" type="VARCHAR" size="255"/>
+    <column name="company" phpName="Company" type="VARCHAR" size="255"/>
+    <column name="address" phpName="Address" type="VARCHAR" size="255"/>
+    <column name="status" phpName="Status" type="CHAR" sqlType="ENUM('pending','accepted','rejected')" defaultValue="pending"/>
+    <column name="password_draft" phpName="PasswordDraft" type="VARCHAR" size="255"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP" required="true"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="tower_rec_submission" idMethod="native" phpName="TowerRecSubmission">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="name" phpName="Name" type="VARCHAR" size="255" required="true"/>
+    <column name="partner_id" phpName="PartnerId" type="INTEGER"/>
+    <column name="longitude" phpName="Longitude" type="VARCHAR" size="255" required="true"/>
+    <column name="latitude" phpName="Latitude" type="VARCHAR" size="255" required="true"/>
+    <column name="cell_plan_id" phpName="CellPlanId" type="INTEGER"/>
+    <column name="distance_from_center" phpName="DistanceFromCenter" type="FLOAT"/>
+    <column name="height" phpName="Height" type="INTEGER" required="true"/>
+    <column name="district" phpName="District" type="VARCHAR" size="255"/>
+    <column name="village" phpName="Village" type="VARCHAR" size="255"/>
+    <column name="tower_type" phpName="TowerType" type="VARCHAR" size="255"/>
+    <column name="location" phpName="Location" type="VARCHAR" size="255"/>
+    <column name="reviewer_note" phpName="ReviewerNote" type="LONGVARCHAR"/>
+    <column name="status" phpName="Status" type="CHAR" sqlType="ENUM('pending','accepted','rejected')" defaultValue="pending"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP" required="true"/>
+    <foreign-key foreignTable="partner">
+      <reference local="partner_id" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="cell_plan">
+      <reference local="cell_plan_id" foreign="id"/>
+    </foreign-key>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+
+  <table name="ugroup" idMethod="native" phpName="Group">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="name" phpName="Name" type="VARCHAR" size="255" required="true"/>
+    <column name="description" phpName="Description" type="LONGVARCHAR"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP" required="true"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="user_group" isCrossRef="true">
+    <column name="user_id" phpName="UserId" type="integer" primaryKey="true"/>
+    <column name="group_id" phpName="GroupId" type="integer" primaryKey="true"/>
+    <foreign-key foreignTable="user">
+      <reference local="user_id" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="ugroup" phpName="Group">
+      <reference local="group_id" foreign="id"/>
+    </foreign-key>
+  </table>
+  <table name="menu_group" isCrossRef="true">
+    <column name="menu_id" phpName="MenuId" type="integer" primaryKey="true"/>
+    <column name="group_id" phpName="GroupId" type="integer" primaryKey="true"/>
+    <column name="access" phpName="Access" type="CHAR" sqlType="ENUM('read','write')" required="true"/>
+    <foreign-key foreignTable="menu">
+      <reference local="menu_id" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="ugroup" phpName="Group">
+      <reference local="group_id" foreign="id"/>
+    </foreign-key>
+  </table>
+  <table name="menu" idMethod="native" phpName="Menu">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="name" phpName="Name" type="VARCHAR" size="255" required="true"/>
+    <column name="url" phpName="Url" type="VARCHAR" size="255" required="true"/>
+    <column name="icon" phpName="Icon" type="VARCHAR" size="255" required="true"/>
+    <column name="controller" phpName="Controller" type="VARCHAR" size="255" required="true"/>
+    <column name="user_role" phpName="UserRole" type="CHAR" sqlType="ENUM('admin','applicant')" required="true"/>
+    <column name="parent_id" phpName="ParentId" type="INTEGER"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP" required="true"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP" required="true"/>
+    <foreign-key foreignTable="menu" phpName="Parent" phpRefName="Child" skipSql="true">
+      <reference local="parent_id" foreign="id"/>
+    </foreign-key>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="cell_plan" idMethod="native" phpName="CellPlan">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="name" phpName="Name" type="VARCHAR" size="255" required="true"/>
+    <column name="longitude" phpName="Longitude" type="VARCHAR" size="255" required="true"/>
+    <column name="latitude" phpName="Latitude" type="VARCHAR" size="255" required="true"/>
+    <column name="status" phpName="Status" type="CHAR" sqlType="ENUM('new','existing')" defaultValue="new" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP" required="true"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP" required="true"/>
+  </table>
+  <table name="tower" idMethod="native" phpName="Tower">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="name" phpName="Name" type="VARCHAR" size="255" required="true"/>
+    <column name="longitude" phpName="Longitude" type="VARCHAR" size="255" required="true"/>
+    <column name="latitude" phpName="Latitude" type="VARCHAR" size="255" required="true"/>
+    <column name="height" phpName="Height" type="INTEGER" required="true"/>
+    <column name="location" phpName="Location" type="VARCHAR" size="255"/>
+    <column name="partner_id" phpName="PartnerId" type="INTEGER"/>
+    <column name="build_date" phpName="BuildDate" type="DATE"/>
+    <column name="land_owner" phpName="LandOwner" type="VARCHAR" size="255"/>
+    <column name="cell_plan_id" phpName="CellPlanId" type="INTEGER"/>
+    <column name="tower_type" phpName="TowerType" type="VARCHAR" size="255"/>
+    <column name="status" phpName="Status" type="CHAR" sqlType="ENUM('new','existing')" defaultValue="new" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP" required="true"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP" required="true"/>
+    <foreign-key foreignTable="partner">
+      <reference local="partner_id" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="cell_plan">
+      <reference local="cell_plan_id" foreign="id"/>
+    </foreign-key>
+  </table>
+  <table name="partner" idMethod="native" phpName="Partner">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="id_number" phpName="IdNumber" type="VARCHAR" size="255"/>
+    <column name="id_type" phpName="IdType" type="VARCHAR" size="255"/>
+    <column name="name" phpName="Name" type="VARCHAR" size="255" required="true"/>
+    <column name="email" phpName="Email" type="VARCHAR" size="255"/>
+    <column name="phone" phpName="Phone" type="VARCHAR" size="255"/>
+    <column name="website" phpName="Website" type="VARCHAR" size="255"/>
+    <column name="image" phpName="Image" type="LONGVARCHAR"/>
+    <column name="address" phpName="Address" type="VARCHAR" size="255"/>
+    <column name="remark" phpName="Remark" type="VARCHAR" size="255"/>
+    <column name="company_id" phpName="CompanyId" type="INTEGER"/>
+    <column name="active" phpName="Active" type="BOOLEAN" defaultValue="true"/>
+    <column name="class_key" type="INTEGER" inheritance="single">
+      <inheritance key="1" class="Partner"/>
+      <inheritance key="2" class="Internal" extends="Partner"/>
+      <inheritance key="3" class="TowerApplicant" extends="Partner"/>
+      <inheritance key="4" class="TowerOwner" extends="Partner"/>
+    </column>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP" required="true"/>
+    <index name="company_id">
+      <index-column name="company_id"/>
+    </index>
+    <foreign-key foreignTable="partner" phpName="Company" phpRefName="CompanyMember" skipSql="true" name="product_company_ibfk_2">
+      <reference local="company_id" foreign="id"/>
+    </foreign-key>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+
+  <table name="survey" idMethod="native" phpName="Survey">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="name" phpName="Name" type="VARCHAR"/>
+    <column name="survey_ref" phpName="SurveyRef" type="VARCHAR" size="255"/>
+    <column name="survey_date" phpName="SurveyDate" type="DATE" required="true"/>
+    <column name="survey_result" phpName="SurveyResult" type="LONGVARCHAR" />
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP" required="true"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP" required="true"/>
+  </table>
+  <table name="survey_officer" idMethod="native" phpName="SurveyOfficer">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="survey_id" phpName="SurveyId" type="INTEGER" required="true"/>
+    <column name="partner_id" phpName="PartnerId" type="INTEGER" required="true"/>
+    <column name="role" phpName="Role" type="VARCHAR" />
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP" required="true"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP" required="true"/>
+    <foreign-key foreignTable="partner">
+      <reference local="partner_id" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="survey">
+      <reference local="survey_id" foreign="id"/>
+    </foreign-key>
+  </table>
+  <table name="attachment" phpName="Attachment">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="name" phpName="Name" required="true" type="VARCHAR" size="255"/>
+    <column name="model" phpName="Model" required="true" type="VARCHAR" size="255"/>
+    <column name="object_id" phpName="ObjectId" type="INTEGER" />
+    <column name="path" phpName="Path" required="true" type="VARCHAR" size="255"/>
+    <column name="description" phpName="Description" type="LONGVARCHAR" />
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP" required="true"/>
+  </table>
+  <table name="sys_task" phpName="SysTask">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="name" phpName="Name" required="true" type="VARCHAR" size="255"/>
+    <column name="priority" phpName="Priority" required="true" type="INTEGER" defaultValue="0"/>
+    <column name="content" phpName="Content" type="LONGVARCHAR"/>
+    <column name="description" phpName="Description" type="LONGVARCHAR"/>
+    <column name="type" phpName="Type" type="VARCHAR" size="255"/>
+    <column name="time_execution" phpName="TimeExecution" type="TIME"/>
+    <column name="scheduled_execution" phpName="ScheduledExecution" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP"/>
+    <column name="day_repeat" phpName="DayRepeat" type="VARCHAR" size="255"/>
+    <!-- if this is a repeated task, use is_executed, otherwise, use last_execution -->
+    <column name="status" phpName="Status" type="CHAR" sqlType="ENUM('wait','fail','done')" required="true" defaultValue="wait"/>
+    <column name="last_execution" phpName="LastExecution" type="TIMESTAMP"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP" required="true"/>
+  </table>
+  <table name="retribution" phpName="Retribution">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="name" phpName="Name" required="true" type="VARCHAR" size="255"/>
+    <column name="payment_date" phpName="PaymentDate" type="DATE"/>
+    <column name="payment_amount" phpName="PaymentAmount" type="INTEGER"/>
+    <column name="tower_id" phpName="TowerId" type="INTEGER" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP" required="true"/>
+    <foreign-key foreignTable="tower">
+      <reference local="tower_id" foreign="id"/>
+    </foreign-key>
+  </table>
+  <table name="configuration" phpName="Configuration">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="name" phpName="Name" required="true" type="VARCHAR" size="255"/>
+    <column name="description" phpName="Description" required="true" type="LONGVARCHAR"/>
+    <column name="type" phpName="Type" type="CHAR" sqlType="ENUM('value','content')"/>
+    <column name="data_value" sqlType="LONGTEXT" phpName="DataValue" type="LONGVARCHAR"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP" required="true"/>
+  </table>
+
+</database>

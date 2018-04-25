@@ -1,0 +1,29 @@
+{% extends "report_layout/base_report.html" %}
+{% block style %}
+
+{% endblock %}
+{% block layout %}
+<div class="row" id="report-header">
+  <div class="col-xs-4">
+    <img src="public/assets/img/logo.jpg" style="width:70%" alt="">
+    <div id="report-header-addr">
+      <span>
+        Kawasan Industri Candi Jl. Gatot Subroto Kav. 19 No. 01, Semarang - Indonesia
+      </span>
+      <br>
+      <span>
+        Tel: (62.24) 761-4489, Fax: (62.24) 761-4483W
+      </span>
+    </div>
+  </div>
+  <div class="col-xs-8">
+
+  </div>
+</div>
+<div class="row">
+<div class="col-xs-12">
+  {% block content %}
+  {% endblock %}
+</div>
+</div>
+{% endblock %}

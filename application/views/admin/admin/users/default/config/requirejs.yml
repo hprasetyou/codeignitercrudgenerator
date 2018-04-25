@@ -1,0 +1,24 @@
+config:
+    shim:
+        'jquery-ui':
+            deps:
+                - 'jquery'
+        'underscore':
+            exports: '_'
+        'backbone':
+            deps:
+                - 'underscore'
+                - 'jquery'
+            exports: 'Backbone'
+    paths:
+        'jquery-ui': 'bundles/oroui/lib/jquery-ui.js'
+        'bootstrap': 'bundles/oroui/lib/bootstrap.js'
+        'b2b/themes/customtheme/js/jquery-3.2.1.min.js': 'bundles/b2b/themes/customtheme/js/jquery-3.2.1.min.js'
+        'b2b/themes/customtheme/js/custom-script': 'bundles/b2b/themes/customtheme/js/custom-script.js'
+        'b2b/themes/customtheme/js/xzoom': 'bundles/b2b/themes/customtheme/js/xzoom.min.js'
+        'b2b/themes/customtheme/js/fancybox': 'bundles/b2b/themes/customtheme/js/jquery.fancybox.js'
+        'b2b/themes/customtheme/js/foundation': 'bundles/b2b/themes/customtheme/js/foundation.min.js'
+        'b2b/themes/customtheme/js/setup': 'bundles/b2b/themes/customtheme/js/setup.js'
+        'b2b/themes/customtheme/js/app/modules/my-module': 'bundles/b2b/themes/customtheme/js/app/modules/my-module.js'
+    appmodules:
+        - b2b/themes/customtheme/js/app/modules/my-module

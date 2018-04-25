@@ -1,0 +1,12 @@
+{% extends "report_layout/base_report.html" %}
+{% block content %}
+<div id="letterhead">
+  {{get_letterhead()|raw}}
+</div>
+<div class="col-xs-12">
+  <hr>
+</div>
+<div id="letterbody">
+{{content | raw}}
+</div>
+{% endblock %}

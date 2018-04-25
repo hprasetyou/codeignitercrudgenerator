@@ -1,0 +1,36 @@
+{% extends "dashboard.html" %} {% set title= res.string.configuration %} {% set bc_text = 'Email' %} {% set breadcrumbs = [ {'link': base_url~'index.php/back/admin/manage_configurations','text':
+res.string.configuration }, {'link':'#','text':bc_text }] %} {% block content %}
+<div class="row">
+ <div class="col-md-12 col-sm-12 col-xs-12">
+   <form id="form_Configuration" method="post" action="/index.php/back/admin/manage_configurations/configure_email" data-parsley-validate class="form-horizontal form-label-left">
+     <div class="box box-info">
+       <div class="box-header with-border">
+         {% include 'common/_form_header.html' with {'back_url':'/index.php/manage_configurations'~back_link, 'title': res.string.configuration, 'delete_url':'/index.php/manage_configurations/delete/' ~ Configurations.Id, 'object':Configuration} %}
+       </div>
+       <div class="box-body">
+         {% for key,val in configuration %}
+         <div class="form-group">
+           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="DataValue">{{attribute(res.string,key)}}</label>
+           <div class="col-md-8 col-sm-8 col-xs-12">
+             <div class="input-wrap">
+                   <input required type="text" placeholder="{{ attribute(res.string,key) }}" id="{{key}}" value="{{ key != 'password'? val:'' }}" name="conf[{{key}}]" class="form-control  col-md-7 col-xs-12">
+             </div>
+           </div>
+         </div>
+         {% endfor %}
+         <div class="form-group">
+           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="DataValue">Email Recipient test</label>
+           <div class="col-md-8 col-sm-8 col-xs-12">
+             <div class="input-wrap">
+                   <input required type="email" placeholder="{{ attribute(res.string,key) }}" name="testEmail" class="form-control  col-md-7 col-xs-12">
+                   <span id="helpBlock" class="help-block">Untuk keperluan test konfigurasi, mohon isi kolom ini dengan alamat email apa saja yang penting valid</span>
+             </div>
+           </div>
+         </div>
+       </div>
+   </form>
+   </div>
+ </div>
+ <!-- Modal -->
+
+ {% endblock %} {% block bottom%} {% endblock %}

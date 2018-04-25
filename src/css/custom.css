@@ -1,0 +1,76 @@
+
+.control-value, .value{
+  padding-top: 8px;
+  padding-left: 20px;
+}
+.control-label{
+  text-align: left !important;
+}
+.img-layer{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+}
+#map, #map_area {
+  height: 400px;
+  width: 100%;
+ }
+.form-checkbox{
+  text-align: left;
+}
+#map-tower-rec-submission{
+  height: 400px;
+}
+textarea {
+    resize: none;
+}
+.image-item{
+  width: 100%
+}
+.measure{
+  text-align: left;
+  font-weight: 400;
+}
+.nopadding{
+  padding: 0 !important;
+}
+.dataTable{
+  /*font-size: 0.8em !important;*/
+}
+.sorting::after{
+    display: none !important;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.btn-row-action{
+  display: none;
+}
+
+tr.group{
+  background-color: #e6ffe6 !important;
+  font-weight: 510;
+}
+
+tr.draftline{
+  color: #777;
+  font-weight: 500;
+}
+tr.confline{
+  color: #0066ff;
+  font-weight: 500;
+}
+
+body{
+  /* font-size: 1.35em; */
+}
+.select2-container--default .select2-selection--single{
+   border: 1px solid #ccc !important;
+   border-radius: 0px !important;
+   height: 33px;
+}

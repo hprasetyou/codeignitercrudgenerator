@@ -1,0 +1,158 @@
+ {% extends "dashboard.html" %} {% set title=" Tower Rec Submission " %} {% if TowerRecSubmission %} {% set bc_text = TowerRecSubmission.id %} {% else %} {% set bc_text = res.string.new %} {% endif %} {% set breadcrumbs = [ {'link': base_url~'index.php/back/applicant/manage_towerrecsubmissions','text':
+res.string.towerrecsubmission }, {'link':'#','text':bc_text }] %} {% block content %}
+<div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<form id="form_TowerRecSubmission" method="post" action="{{base_url}}index.php/back/applicant/manage_towerrecsubmissions/write/{{ TowerRecSubmission.id }}" data-parsley-validate class="form-horizontal form-label-left">
+			<div class="box box-info">
+				<div class="box-header with-border">
+
+          <h3 class="box-title"> {{res.string.towerrecsubmission}} </h3>
+          {% if TowerRecSubmission %}
+          {% if TowerRecSubmission.State not in ['accepted'] %}
+          <a href="#" class="btn btn-danger pull-right" data-url="/index.php/back/applicant/manage_towerrecsubmissions/delete/{{TowerRecSubmission.Id}}" data-toggle="modal" id="btn-delete" data-target="#deleteModal"><i class="fa fa-trash-o"></i> {{res.string.delete}}</a>
+          <a href="#" class="btn btn-primary pull-right" id="btn-edit"><i class="fa fa-edit"></i> {{res.string.edit}}</a>
+          <a href="#" style="display:none" class="btn btn-primary pull-right" id="btn-canceledit">{{res.string.cancel}}</a>
+          {% else %}
+          <a href="/index.php/back/applicant/manage_towerrecsubmissions/detail/{{TowerRecSubmission.Id}}" class="btn btn-default pull-right">{{res.string.print_recomendation}}</a>
+          {% endif %}
+          {% endif %}
+          <button type="submit" {% if TowerRecSubmission %}style="display:none"{% endif %} name="button" class="btn btn-success pull-right" id="btn-save"><i class="fa fa-save"></i> {{res.string.save}}</button>
+
+				</div>
+				<div class="box-body">
+					<div class="col-sm-7">
+						<h4>{{res.string.select_location}} <small>(*{{res.string.select_location_desc}})</small></h4>
+						<div id="map-tower-rec-submission"
+             {% if TowerRecSubmission %}
+            data-marker-lat="{{ TowerRecSubmission.Latitude }}"
+            data-marker-lng="{{ TowerRecSubmission.Longitude }}"
+            {%else%}
+            data-editable="1"
+            {% endif %}
+            ></div>
+					</div>
+					<div class="col-sm-5">
+						<h4>{{res.string.location_info}}</h4>
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Name">{{res.string.code}}</label>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div {% if TowerRecSubmission %}style="display:none" {% endif %} class="input-wrap">
+									<input type="text" placeholder="{{ res.string.name.code }}" id="Name"
+                  readonly
+                  value="{{ TowerRecSubmission? TowerRecSubmission.Name:numbering({format:'TREQ-y-i',tb_name:'tower_rec_submission',tb_field:'name'}) }}"
+                  name="Name" required="required" class="form-control  col-md-7 col-xs-12">
+								</div>
+								{% if TowerRecSubmission %}
+								<p class="control-value">{{ TowerRecSubmission.Name }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Longitude">{{res.string.longitude}}</label>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div {% if TowerRecSubmission %}style="display:none" {% endif %} class="input-wrap">
+									<input type="text" placeholder="{{ res.string.longitude }}" id="Longitude" value="{{ TowerRecSubmission.Longitude }}" name="Longitude" required="required" class="form-control  col-md-7 col-xs-12">
+								</div>
+								{% if TowerRecSubmission %}
+								<p class="control-value">{{ TowerRecSubmission.Longitude }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Latitude">{{res.string.latitude}}</label>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div {% if TowerRecSubmission %}style="display:none" {% endif %} class="input-wrap">
+									<input type="text" placeholder="{{ res.string.latitude }}" id="Latitude" value="{{ TowerRecSubmission.Latitude }}" name="Latitude" required="required" class="form-control  col-md-7 col-xs-12">
+								</div>
+								{% if TowerRecSubmission %}
+								<p class="control-value">{{ TowerRecSubmission.Latitude }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Location">{{res.string.location}}</label>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div {% if TowerRecSubmission %}style="display:none" {% endif %} class="input-wrap">
+									<textarea placeholder="{{ res.string.location }}" id="Location" value="{{ TowerRecSubmission.Location }}" name="Location" class="form-control  col-md-7 col-xs-12">
+									  {{ TowerRecSubmission.Location }}
+									</textarea>
+								</div>
+								{% if TowerRecSubmission %}
+								<p class="control-value">{{ TowerRecSubmission.Location }}</p>
+								{% endif %}
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Latitude">{{res.string.district}}</label>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div {% if TowerRecSubmission %}style="display:none" {% endif %} class="input-wrap">
+									<input type="text" placeholder="{{ res.string.district }}"  name="District" id="District"value="{{ TowerRecSubmission.District }}" required="required" class="form-control  col-md-7 col-xs-12">
+								</div>
+								{% if TowerRecSubmission %}
+								<p class="control-value">{{ TowerRecSubmission.District }}</p>
+								{% endif %}
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Latitude">{{res.string.village}}</label>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div {% if TowerRecSubmission %}style="display:none" {% endif %} class="input-wrap">
+									<input type="text" placeholder="{{ res.string.village }}" name="Village" id="Village" value="{{ TowerRecSubmission.Village }}" required="required" class="form-control  col-md-7 col-xs-12">
+								</div>
+								{% if TowerRecSubmission %}
+								<p class="control-value">{{ TowerRecSubmission.Village }}</p>
+								{% endif %}
+							</div>
+						</div>
+            <div class="form-group">
+    							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Latitude">{{res.string.distance}}</label>
+    							<div class="col-md-6 col-sm-6 col-xs-12">
+    								<div {% if TowerRecSubmission %}style="display:none" {% endif %} class="input-wrap">
+    									<input type="text" placeholder="{{ res.string.distance }}" id="DistanceFromCenter" value="{{ TowerRecSubmission.DistanceFromCenter }}" name="DistanceFromCenter" required="required" class="form-control  col-md-7 col-xs-12">
+    								</div>
+    								{% if TowerRecSubmission %}
+    								<p class="control-value">{{ TowerRecSubmission.DistanceFromCenter }}</p>
+    								{% endif %}
+    							</div>
+    						</div>
+
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Height">{{res.string.height}}</label>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div {% if TowerRecSubmission %}style="display:none" {% endif %} class="input-wrap">
+									<input type="text" placeholder="{{ res.string.height }}" id="Height"
+                  value="{{ TowerRecSubmission.Height }}" name="Height" required="required" class="form-control col-md-7 col-xs-12">
+								</div>
+								{% if TowerRecSubmission %}
+								<p class="control-value">{{ TowerRecSubmission.Height }}</p>
+								{% endif %}
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="TowerType">{{res.string.tower_type}}</label>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div {% if TowerRecSubmission %}style="display:none" {% endif %} class="input-wrap">
+									<input type="text" placeholder="{{ res.string.tower_type }}" id="Height"
+                  value="{{ TowerRecSubmission.TowerType }}" name="TowerType" required="required" class="form-control col-md-7 col-xs-12">
+								</div>
+								{% if TowerRecSubmission %}
+								<p class="control-value">{{ TowerRecSubmission.TowerType }}</p>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+
+		</form>
+		</div>
+	</div>
+
+	{% endblock %} {% block bottom%}
+	<script src="/public/assets/rec_submission_form.js" type="text/javascript">
+	</script>
+	{% endblock %}

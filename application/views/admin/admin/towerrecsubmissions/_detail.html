@@ -1,0 +1,130 @@
+<div class="row">
+  <div class="col-sm-12">
+    <h4>{{res.string.selected_location}}</h4>
+    <div id="map-tower-rec-submission" {% if TowerRecSubmission %} data-marker-lat="{{ TowerRecSubmission.Latitude }}" data-marker-lng="{{ TowerRecSubmission.Longitude }}" {%else%} data-editable {% endif %}></div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-5">
+    <h4>{{res.string.location_info}}</h4>
+    <div class="form-group">
+      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Name">{{res.string.code}}</label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <p class="control-value">{{ TowerRecSubmission.Name }}</p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Longitude">{{res.string.longitude}}</label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <p class="control-value">{{ TowerRecSubmission.Longitude }}</p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Latitude">{{res.string.latitude}}</label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <p class="control-value">{{ TowerRecSubmission.Latitude }}</p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Location">{{res.string.location}}</label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <p class="control-value">{{ TowerRecSubmission.Location }}</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Latitude">{{res.string.district}}</label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <p class="control-value">{{ TowerRecSubmission.District }}</p>
+
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Latitude">{{res.string.village}}</label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <p class="control-value">{{ TowerRecSubmission.Village }}</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Latitude">{{res.string.distance_from_center}}</label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <p class="control-value">{{ TowerRecSubmission.DistanceFromCenter }} m</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="TowerType">{{res.string.tower_type}}</label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <p class="control-value">{{ TowerRecSubmission.TowerType }}</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="TowerType">{{res.string.height}}</label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <p class="control-value">{{ TowerRecSubmission.Height }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <h4>{{res.string.applicant_info}}</h4>
+
+    <div class="form-group">
+      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="IdNumber">{{TowerRecSubmission.Partner.IdType}} {{res.string.number}} </label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <p class="control-value">{{ TowerRecSubmission.Partner.IdNumber }}</p>
+
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Name">{{res.string.name}}</label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <p class="control-value">{{ TowerRecSubmission.Partner.Name }}</p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Email">{{res.string.email}}</label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <p class="control-value">{{ TowerRecSubmission.Partner.Email }}</p>
+
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Phone">{{res.string.phone}}</label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <p class="control-value">{{ TowerRecSubmission.Partner.Phone }}</p>
+
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Address">{{res.string.address}}</label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <p class="control-value">{{ TowerRecSubmission.Partner.Address }}</p>
+
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Remark">{{res.string.remark}}</label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <p class="control-value">{{ TowerRecSubmission.Partner.Remark }}</p>
+
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="CompanyId">{{res.string.company}}</label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <p class="control-value">{{ TowerRecSubmission.Partner.Company.Name }}</p>
+
+      </div>
+    </div>
+
+
+  </div>
+
+</div>

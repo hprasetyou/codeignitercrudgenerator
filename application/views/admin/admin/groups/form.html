@@ -1,0 +1,101 @@
+ {% extends "dashboard.html" %} {% set title=" Group " %} {% if grouGroupps %} {% set bc_text = groups.id %} {% else %} {% set bc_text = res.string.new %} {% endif %} {% set breadcrumbs = [ {'link': base_url~'index.php/manage_groups','text': res.string.group
+}, {'link':'#','text':bc_text }] %} {% block content %}
+<div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<form id="form_Group" method="post" action="/index.php/back/admin/manage_groups/write/{{ Group.id }}" data-parsley-validate class="form-horizontal form-label-left">
+			<div class="box box-info">
+				<div class="box-header with-border">
+					{% include 'common/_form_header.html' with {'back_url':'/index.php/manage_groups'~back_link, 'title': res.string.group, 'delete_url':'/index.php/manage_groups/delete/' ~ Group.Id, 'object':Group} %}
+				</div>
+				<div class="box-body">
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Name">{{res.string.name}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<div {% if Group %}style="display:none" {% endif %} class="input-wrap">
+								<input type="text" placeholder="{{ res.string.name }}" id="Name" value="{{ Group.Name }}" name="Name" required="required" class="form-control  col-md-7 col-xs-12">
+							</div>
+							{% if Group %}
+							<p class="control-value">{{ Group.Name }}</p>
+							{% endif %}
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Description">{{res.string.description}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<div {% if Group %}style="display:none" {% endif %} class="input-wrap">
+								<input type="text" placeholder="{{ res.string.description }}" id="Description" value="{{ Group.Description }}" name="Description" class="form-control  col-md-7 col-xs-12">
+							</div>
+							{% if Group %}
+							<p class="control-value">{{ Group.Description }}</p>
+							{% endif %}
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+
+			{% if Group %}
+			<div class="box box-info">
+				<div class="box-header with-border">
+					{{res.string.access_control}}
+				</div>
+				<div class="box-body">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>{{res.string.group}}</th>
+									<th>{{res.string.menu}}</th>
+									<th>{{res.string.read}}</th>
+									<th>{{res.string.modify}}</th>
+									<th>{{res.string.none}}</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for i,menu in menus %}
+								<tr>
+									<td>{{i+1}}</td>
+									<td>{{attribute(res.string,menu.parent.name)}}</td>
+									<td>{{attribute(res.string,menu.name)}}</td>
+									<td><input class="form-cb"
+		    								{% if Group %}
+		    									disabled
+	       									{% endif %}
+		   								 type="radio"
+		    								{% if menu.Access.Access == 'read' %}
+		   							checked="checked"
+		    								{% endif %}
+											value="read"
+										name="Access[{{menu.Id}}]" id=""></td>
+								<td><input type="radio" class="form-cb"
+										{% if menu.Access.Access == 'write' %}
+		   								checked="checked"
+		    								{% endif %}
+	     									value="write"
+		    								{% if Group %}
+		    									disabled
+	       									{% endif %}
+										name="Access[{{menu.Id}}]" id=""></td>
+								<td><input type="radio"
+		   							{% if not menu.Access %}
+										checked="checked"
+		   							{% endif %}
+									class="form-cb"></td>
+								</tr>
+
+								{% endfor%}
+							</tbody>
+						</table>
+				</div>
+			</div>
+			{% endif %}
+		</form>
+
+	</div>
+</div>
+<!-- Modal -->
+
+{% endblock %} {% block bottom%} {% endblock %}

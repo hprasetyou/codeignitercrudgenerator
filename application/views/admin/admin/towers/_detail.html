@@ -1,0 +1,108 @@
+<div class="col-sm-6">
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Name">{{res.string.name}}</label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <div {% if Tower %}style="display:none" {% endif %} class="input-wrap">
+        <input type="text" placeholder="{{ res.string.name }}" id="Name" value="{{ Tower? Tower.Name:numbering({format:'T-i',tb_name:'tower',tb_field:'name'}) }}" readonly name="Name" required="required" class="form-control  col-md-7 col-xs-12">
+      </div>
+      {% if Tower %}
+      <p class="control-value">{{ Tower.Name }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Longitude">{{res.string.longitude}}</label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <div {% if Tower %}style="display:none" {% endif %} class="input-wrap">
+        <input type="text" placeholder="{{ res.string.longitude }}" id="Longitude" value="{{ Tower.Longitude }}" name="Longitude" required="required" class="form-control  col-md-7 col-xs-12">
+      </div>
+      {% if Tower %}
+      <p class="control-value">{{ Tower.Longitude }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Latitude">{{res.string.latitude}}</label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <div {% if Tower %}style="display:none" {% endif %} class="input-wrap">
+        <input type="text" placeholder="{{ res.string.latitude }}" id="Latitude" value="{{ Tower.Latitude }}" name="Latitude" required="required" class="form-control  col-md-7 col-xs-12">
+      </div>
+      {% if Tower %}
+      <p class="control-value">{{ Tower.Latitude }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Height">{{res.string.height}}</label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <div {% if Tower %}style="display:none" {% endif %} class="input-wrap">
+        <input type="number" placeholder="{{ res.string.height }}" id="Height" value="{{ Tower.Height }}" name="Height" required="required" class="form-control  col-md-7 col-xs-12">
+      </div>
+      {% if Tower %}
+      <p class="control-value">{{ Tower.Height }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Location">{{res.string.location}}</label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <div {% if Tower %}style="display:none" {% endif %} class="input-wrap">
+        <input type="text" placeholder="{{ res.string.location }}" id="Location" value="{{ Tower.Location }}" name="Location" class="form-control  col-md-7 col-xs-12">
+      </div>
+      {% if Tower %}
+      <p class="control-value">{{ Tower.Location }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+</div>
+<div class="col-sm-6">
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="LandOwner">{{res.string.land_owner}}</label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <div {% if Tower %}style="display:none" {% endif %} class="input-wrap">
+        <input type="text" placeholder="{{ res.string.land_owner }}" id="LandOwner" value="{{ Tower.LandOwner }}" name="LandOwner" class="form-control  col-md-7 col-xs-12">
+      </div>
+      {% if Tower %}
+      <p class="control-value">{{ Tower.LandOwner }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Status">{{res.string.status}}</label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <div {% if Tower %}style="display:none" {% endif %} class="input-wrap">
+        <select id="Status" value="{{ Tower.Status }}" name="Status" required="required" class="form-control form-select col-md-7 col-xs-12">
+        <option  {% if Tower.Status == new %}selected="selected"{% endif %} value="new">new</option>
+        <option  {% if Tower.Status == existing %}selected="selected"{% endif %} value="existing">existing</option>
+      </select>
+      </div>
+      {% if Tower %}
+      <p class="control-value">{{ Tower.Status }}</p>
+      {% endif %}
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="LandOwner">{{res.string.company}}</label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <div {% if Tower %}style="display:none" {% endif %} class="input-wrap">
+        <select placeholder="{{ res.string.owner }}" id="PartnerId"
+        value="{{ Tower.PartnerId }}" name="PartnerId"
+        data-url="/index.php/back/admin/manage_partners/get_companies"
+        class="form-control select2-remote col-md-7 col-xs-12">
+          {% if Tower %}
+          <option value="{{ Tower.PartnerId }}" selected="selected">{{ Tower.Partner.Name }}</option>
+          {% endif %}
+        </select>
+      </div>
+      {% if Tower %}
+      <p class="control-value">{{ Tower.Partner.Name }}</p>
+      {% endif %}
+    </div>
+  </div>
+</div>

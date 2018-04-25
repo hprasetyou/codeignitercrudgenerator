@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <link rel="stylesheet" href="/public/assets/main.css">
+  <title>Document</title>
+<style>
+body{
+background: url('/public/assets/img/menara-tower.jpg');
+background-size:cover;
+}
+.navbar{
+background: #fff;
+}
+.alert, .panel{
+  position: relative;
+}
+body:before {
+    position: fixed;
+    filter: blur(7px);
+    top: -10px;
+    bottom: -10px;
+    left: -10px;
+    right: -10px;
+    background: rgba(242,239,208,0.8);
+    content: '';
+}
+</style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+        <a class="navbar-brand" href="/">Rekomendasi Menara</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+		<li><a href="/">{{res.string.home}}</a></li>
+	  <li><a href="/register">{{res.string.registration}}</a></li>
+	  <li><a href="/tower">{{res.string.tower}}</a></li>
+        </ul>
+      </div>
+      <!--/.nav-collapse -->
+    </div>
+  </nav>
+  <div class="container">
+    {% if res.info %} {% include "common/_alert_info.html" %} {% endif %}
+    {% block content %} {% endblock %}
+  </div>
+  <!-- /.container -->
+  <script type="text/javascript" src="/public/assets/main.js"></script>
+  {% block bottom %}
+  {% endblock %}
+</body>
+
+</html>

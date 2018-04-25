@@ -1,0 +1,28 @@
+<div class="panel panel-default">
+
+  <form action="" method="post">
+    <div class="panel-heading">
+      Login
+    </div>
+    <div class="panel-body">
+      <div class="form-group has-feedback">
+        <input type="text" id="Username" name="Username" class="form-control" placeholder="{{res.string.username}}" required autofocus>
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password" id="Password" name="Password" class="form-control" placeholder="{{res.string.password}}" required>
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <!-- /.col -->
+        <div class="col-sm-6">
+	  <button type="submit" class="btn btn-primary btn-block btn-flat">{{res.string.login}}</button>
+        </div>
+	<div class="col-sm-6">	
+	  <a class="btn btn-default btn-block btn-flat" href="/index.php/register">{{res.string.register}}</a>
+	</div>
+      </div>
+      <!-- /.col -->
+    </div>
+  </form>
+</div>

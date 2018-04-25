@@ -1,0 +1,81 @@
+ {% extends "dashboard.html" %} {% set title=res.string.applicant %} {% if applicants %} {% set bc_text = Applicant.id %} {% else %} {% set bc_text = res.string.new %} {% endif %} {% set breadcrumbs = [ {'link': base_url~'index.php/manage_applicants','text':
+res.string.applicant }, {'link':'#','text':bc_text }] %} {% block content %}
+<div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<form id="form_Applicant" method="post" action="{{base_url}}index.php/manage_applicants/write/{{ Applicant.id }}" data-parsley-validate class="form-horizontal form-label-left">
+			<div class="box box-info">
+				<div class="box-header with-border">
+					<h3 class="box-title"> {{title}} </h3>
+					<a href="/index.php/back/admin/manage_applicants" class="btn btn-default pull-right">{{res.string.back}}</a>
+          {% if Applicant.Status == 'pending'%}
+					<a href="/index.php/back/admin/manage_applicants/confirm/{{Applicant.Id}}" class="btn btn-default pull-right">{{res.string.confirm}}</a>
+          {% endif %}
+        </div>
+				<div class="box-body">
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Name">{{res.string.name}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<p class="control-value">{{ Applicant.Name }}</p>
+
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Email">{{res.string.email}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<p class="control-value">{{ Applicant.Email }}</p>
+
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="IdNumber">{{res.string.id_number}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<p class="control-value">{{ Applicant.IdNumber }}</p>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Gender">{{res.string.gender}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<p class="control-value">{{ gender(Applicant.Gender) }}</p>
+
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Position">{{res.string.position}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<p class="control-value">{{ Applicant.Position }}</p>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Company">{{res.string.company}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<p class="control-value">{{ Applicant.Company }}</p>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Address">{{res.string.company_address}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<p class="control-value">{{ Applicant.Address }}</p>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Status">{{res.string.status}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<p class="control-value">{{ Applicant.Status }}</p>
+						</div>
+					</div>
+
+				</div>
+		</form>
+		</div>
+	</div>
+	<!-- Modal -->
+
+	{% endblock %} {% block bottom%} {% endblock %}

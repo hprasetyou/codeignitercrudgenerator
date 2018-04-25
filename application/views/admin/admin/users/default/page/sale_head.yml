@@ -1,0 +1,4 @@
+layout:
+    actions:
+        - '@setBlockTheme':
+            themes: '@B2BBundle/Resources/views/layouts/default/page/sale_head.html.twig'

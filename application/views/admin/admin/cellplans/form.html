@@ -1,0 +1,97 @@
+
+{% extends "dashboard.html" %}
+{% set title=" Cell Plan " %}
+{% if CellPlan %}
+	 {% set bc_text = CellPlan.id  %}
+{% else %}
+	 {% set bc_text = res.string.new %}
+{% endif %}
+{% set breadcrumbs = [
+	{'link': base_url~'index.php/manage_cellplans','text': res.string.cellplan },
+	{'link':'#','text':bc_text  }]
+%}
+{% block content %}
+<div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<form id="form_CellPlan" method="post" action="{{base_url}}index.php/manage_cellplans/write/{{ CellPlan.id }}" data-parsley-validate class="form-horizontal form-label-left">
+			<div class="box box-info">
+				<div class="box-header with-border">
+				{% include 'common/_form_header.html'
+				with {'back_url':'/index.php/manage_cellplans'~back_link,
+				'title': res.string.cellplan,
+				'delete_url':'/index.php/manage_cellplans/delete/' ~ CellPlan.Id,
+				'object':cellplans} %}
+				</div>
+				<div class="box-body">
+					<div id="map_area"
+						{% if CellPlan %}
+						 data-marker-lat="{{ CellPlan.Latitude }}" data-marker-lng="{{ CellPlan.Longitude }}"
+						 {%else%}
+						  data-editable="1"
+						 {% endif %}
+					></div>
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Name">{{res.string.name}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if CellPlan %}style="display:none"{% endif %} class="input-wrap">
+							<input type="text" placeholder="{{ res.string.name }}" id="Name" value="{{ CellPlan.Name }}"
+							name="Name" required="required" class="form-control  col-md-7 col-xs-12">
+						</div>
+								{% if CellPlan %}
+									<p class="control-value">{{ CellPlan.Name  }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Longitude">{{res.string.longitude}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if CellPlan %}style="display:none"{% endif %} class="input-wrap">
+							<input type="text" placeholder="{{ res.string.longitude }}" id="Longitude" value="{{ CellPlan.Longitude }}"
+							name="Longitude" required="required" class="form-control  col-md-7 col-xs-12">
+						</div>
+								{% if CellPlan %}
+									<p class="control-value">{{ CellPlan.Longitude  }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Latitude">{{res.string.latitude}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if CellPlan %}style="display:none"{% endif %} class="input-wrap">
+							<input type="text" placeholder="{{ res.string.latitude }}" id="Latitude" value="{{ CellPlan.Latitude }}"
+							name="Latitude" required="required" class="form-control  col-md-7 col-xs-12">
+						</div>
+								{% if CellPlan %}
+									<p class="control-value">{{ CellPlan.Latitude  }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Status">{{res.string.status}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if CellPlan %}style="display:none"{% endif %} class="input-wrap">
+							<input type="text" placeholder="{{ res.string.status }}" id="Status" value="{{ CellPlan.Status }}"
+							name="Status" required="required" class="form-control  col-md-7 col-xs-12">
+						</div>
+								{% if CellPlan %}
+									<p class="control-value">{{ CellPlan.Status  }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+				</div>
+		</form>
+	</div>
+</div>
+<!-- Modal -->
+
+{% endblock %}
+
+{% block bottom%}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLAUAl9I8nQgR3ogoTRGb-guPc_UhuMZ0&callback=initMap" async
+	defer></script>
+<script src="/public/assets/cellplan_form.js" type="text/javascript">
+{% endblock %}

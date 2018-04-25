@@ -1,0 +1,43 @@
+<div class="modal fade" id="modalAvatar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">{{ res.string.upload }}</h4>
+      </div>
+      <div class="modal-body">
+          <input type="hidden" name="image-data" id="image-data" value="">
+          <div class="form-group">
+            <label for="input-avatar">*max size 1mb</label>
+            <input type="file" name="avatar" id="input-avatar" class="form-control">
+            <span id="helpBlock" style="display:none" class="help-block">{{res.string.max1mb}}</span>
+          </div>
+      </div>
+			<div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">{{res.string.ok}}</button>
+			</div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+$('#input-avatar').change(function(){
+	var ext = $(this).val().split('.').pop().toLowerCase()
+	if(($.inArray(ext,['jpg','jpeg','png']) > -1) && this.files[0].size<1000000){
+		if (this.files && this.files[0]){
+				var FR= new FileReader();
+				FR.addEventListener("load", function(e) {
+					$("#modalAvatar").modal('hide')
+					$('.preview-image').prop('src',e.target.result)
+					$('#Image').val(e.target.result)
+			});
+			FR.readAsDataURL( this.files[0] );
+		}
+	}else{
+		$(this).val(null)
+    $(this).parents('.form-group').addClass('has-error')
+		$(this).siblings('#helpBlock').show()
+		}
+})
+</script>

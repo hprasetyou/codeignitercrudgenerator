@@ -1,0 +1,6 @@
+{% for v,k in res.info %}
+<div class="alert alert-{{v}} alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  {{k}}
+</div>
+{% endfor %}

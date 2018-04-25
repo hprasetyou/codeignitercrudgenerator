@@ -1,0 +1,34 @@
+{% if check_access('write',controller) %}
+<div class="list-menu pull-right">
+	<a class="btn btn-primary btn-newdata" href="{% if addnew_uri %}{{addnew_uri}}{%else%}/index.php/{{res.uri}}/create{% endif %}">{{res.string.new_data}}</a>
+  {% if menu_import %}
+  <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#importModal">
+  {{res.string.import}}
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+			<form action="/index.php/{{res.uri}}/import_data" method="post" enctype="multipart/form-data">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">{{res.string.import}}</h4>
+				</div>
+				<div class="modal-body">
+					<h4>Import data sesuai template, (penting! jangan hapus header)</h4>
+					<a href="/index.php/{{res.uri}}/import_template" class="btn btn-default">Template</a>
+					<input class="btn btn-primary" type="file" name="importfile" id="">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">{{res.string.cancel}}</button>
+					<button type="submit" class="btn btn-primary">{{res.string.import}}</button>
+				</div>
+			</form>
+    </div>
+  </div>
+</div>
+  {% endif %}
+</div>
+{% endif %}

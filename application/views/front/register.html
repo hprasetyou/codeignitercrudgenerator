@@ -1,0 +1,13 @@
+{% extends "home.html" %}
+{% block content %}
+<div class="col-sm-6">
+  {% include "front/_registration_form.html"%}
+</div>
+<div class="col-sm-6">
+<div class="panel panel-default">
+  <div class="panel-body">
+    {{registration_info_message | raw}}
+  </div>
+</div>
+</div>
+{% endblock %}

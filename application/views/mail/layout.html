@@ -1,0 +1,11 @@
+{% extends "base.html"%}
+{% block body %}
+<div class="container">
+  <h3>Yang Terhormat, {{recipient_name}},</h3>
+  {{message_body | raw}}
+</div>
+<hr>
+<footer>
+  {{ get_conf_content('email_footer') | raw }}
+</footer>
+{% endblock%}

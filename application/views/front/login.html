@@ -1,0 +1,9 @@
+{% extends "home.html" %}
+{% block content %}
+<div class="col-sm-8">
+  {{greetings | raw}}
+</div>
+<div class="col-sm-4">
+  {% include "front/_login_form.html"%}
+</div>
+{% endblock %}

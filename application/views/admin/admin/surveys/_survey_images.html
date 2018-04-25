@@ -1,0 +1,22 @@
+<h4>{{res.string.images}}</h4>
+<div>
+  <div style="{% if Survey %}display:none;{% endif %}
+  width:100%;
+  height:200px" class="input-wrap" id="survey_images">
+  </div>
+  <div class="row lgl">
+  {% for image in get_attachment('Survey',Survey.Id)%}
+  <div class="col-xs-6 col-md-2">
+    <a href="/public/upload/images/{{ image.Name }}" class="thumbnail ">
+      <img src="/public/upload/images/thumb/{{ image.Name }}" alt="{{ image.Name }}">
+    </a>
+    <a {% if Survey %}style="display:none;width:100%"{% endif %} href="/index.php/back/admin/manage_surveys/remove_image?survey={{Survey.Id}}&amp;id={{image.Id}}"
+    class="btn btn-danger btn-delete-img input-wrap" data-id="{{image.Id}}">
+      <i class="fa fa-trash"></i>{{res.string.delete}}</a>
+  </div>
+
+  {% endfor %}
+  </div>
+  <div class="clearfix"></div>
+</div>
+<input type="hidden" name="Images" id="inputImages">

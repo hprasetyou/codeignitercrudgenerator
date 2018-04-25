@@ -1,0 +1,9 @@
+layout:
+    actions:
+        - '@setBlockTheme':
+            themes: '@B2BBundle/Resources/views/layouts/default/page/import_cdn.html.twig'
+        - '@add':
+            id: import_cdn 
+            parentId: require_js
+            blockType: block
+ 

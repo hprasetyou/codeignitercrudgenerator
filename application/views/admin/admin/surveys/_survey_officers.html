@@ -1,0 +1,39 @@
+<h4>{{res.string.survey_officer}}</h4>
+
+<table class="table" id="surveyOfficer">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>{{res.string.name}}</th>
+      <th>{{res.string.role}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in 0..3 %}
+    {% set so = Survey.SurveyOfficers[i] %}
+    <tr>
+      <td>{{i+1}}</td>
+      <td><div
+        {% if Survey %}style="display:none"{% endif %}
+        class="input-wrap">{{ selection_m2o('SurveyOfficer['~i~']','Internal',so.PartnerId) | raw }}</div>
+      {% if Survey %}
+      <span class="control-value">
+        {{so.Partner.Name}}
+      </span>
+      {% endif %}
+      </td>
+      <td><div
+{% if Survey %}style="display:none"{% endif %}
+        class="input-wrap"><input type="text"
+        value="{% if so %}{{so.Role}}{%else%}Petugas Survey {{i+1}}{% endif%}"
+        name="SurveyRole[{{i}}]" id="Role" class="form-control"></div>
+        {% if Survey %}
+        <span class="control-value">
+          {{so.Role}}
+        </span>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

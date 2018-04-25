@@ -1,0 +1,59 @@
+<div class="panel panel-default">
+	<form id="form_Applicant" method="post" action="" data-parsley-validate>
+
+		<div class="panel-heading">
+			{{res.string.registration}}
+		</div>
+		<div class="panel-body">
+			<div class="form-group">
+				<label class="control-label " for="Name">{{res.string.name}}</label>
+				<input type="text" placeholder="{{ res.string.name }}" id="Name" value="{{ applicants.Name }}" name="Name" required="required" class="form-control ">
+			</div>
+
+			<div class="form-group">
+				<label class="control-label " for="Email">{{res.string.email}}</label>
+				<input type="email" placeholder="{{ res.string.email }}" data-parsley-trigger="change" id="Email" value="{{ applicants.Email }}" name="Email" class="form-control ">
+			</div>
+
+			<div class="form-group">
+				<label class="control-label " for="Password">{{res.string.password}}</label>
+				<input type="password" data-parsley-trigger="input" placeholder="{{ res.string.password }}" id="Password" name="PasswordDraft" required="required" class="form-control ">
+			</div>
+			<div class="form-group">
+				<label class="control-label " for="retype_password">{{res.string.retype_password}}</label>
+				<input type="password" data-parsley-trigger="input" data-parsley-equalto="#Password" placeholder="{{ res.string.retype_password }}" id="retype_password" name="retype_password" required="required" class="form-control ">
+			</div>
+			<div class="form-group">
+				<label class="control-label " for="IdNumber">{{res.string.id_number}}</label>
+				<input type="text" placeholder="{{ res.string.id_number }}" id="IdNumber" value="{{ applicants.IdNumber }}" name="IdNumber" required="required" class="form-control ">
+			</div>
+
+			<div class="form-group">
+				<label class="control-label " for="Gender">{{res.string.gender}}</label>
+				<select id="Gender" value="{{ applicants.Gender }}" name="Gender" class="form-control form-select">
+					<option  {% if applicants.Gender == m %}selected="selected"{% endif %} value="m">Pria</option>
+					<option  {% if applicants.Gender == f %}selected="selected"{% endif %} value="f">Wanita</option>
+				</select>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label " for="Position">{{res.string.position}}</label>
+				<input type="text" placeholder="{{ res.string.position }}" id="Position" value="{{ applicants.Position }}" name="Position" class="form-control ">
+			</div>
+
+			<div class="form-group">
+				<label class="control-label " for="Company">{{res.string.company}}</label>
+				<input type="text" placeholder="{{ res.string.company }}" id="Company" value="{{ applicants.Company }}" name="Company" class="form-control ">
+			</div>
+
+			<div class="form-group">
+				<label class="control-label " for="Address">{{res.string.company_address}}</label>
+				<input type="text" placeholder="{{ res.string.company_address }}" id="Address" value="{{ applicants.Address }}" name="Address" class="form-control ">
+			</div>
+		</div>
+		<div class="panel-footer">
+			<button type="submit" class="btn btn-primary pull-right" name="button">{{res.string.register}}</button>
+				<div class="clearfix"></div>
+		</div>
+	</form>
+</div>

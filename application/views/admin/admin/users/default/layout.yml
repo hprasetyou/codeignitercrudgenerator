@@ -1,0 +1,7 @@
+layout:
+    actions:
+        - '@remove':
+            id: footer_menu_container
+        - '@remove':
+            id: middle_bar_search
+    conditions: '!context["is_logged_in"]'

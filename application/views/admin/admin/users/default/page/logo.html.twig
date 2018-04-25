@@ -1,0 +1,28 @@
+{% block _logo_widget %}
+
+{% if app.request.attributes.get('_route') == 'oro_frontend_root' %}
+        <img
+            src="{% image '@B2BBundle/Resources/public/themes/customtheme/images/logo.svg' %}{{ asset_url }}{% endimage %}"
+            class="logo"
+            alt="logo"
+        >
+    {% else %}
+        <a href="{{ path('oro_frontend_root') }}" class="logo" style="background: url('{% image '@B2BBundle/Resources/public/themes/customtheme/images/logo.svg' %}{{ asset_url }}{% endimage %}') no-repeat; background-position: center;">Triconville</a>
+    {% endif %}
+{% endblock %}
+
+
+{% block _custom_layout_expand_widget %}
+
+<script>
+require(['jquery'],function($){
+$(document).ready(function(){
+$('.main-menu__item--ancestor > a').prop('href','#/')
+})
+})
+
+</script>
+{% endblock %}
+{% block _font_google_widget %}
+<link rel="stylesheet" href="{{src}}">
+{% endblock %}

@@ -1,0 +1,16 @@
+layout:
+    actions:
+        - '@setBlockTheme':
+            themes: '@B2BBundle/Resources/views/layouts/default/page/logo.html.twig'
+        - '@add':
+            id: custom_layout_expand
+            parentId: require_js
+            blockType: block
+        - '@add':
+            id: font_google
+            parentId: require_js
+            blockType: style
+            options:
+                src: 'https://fonts.googleapis.com/css?family=Catamaran|Raleway'
+        - '@remove':
+            id: product_view_page

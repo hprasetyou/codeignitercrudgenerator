@@ -1,0 +1,30 @@
+<div class="row">
+	<div class="col-sm-6">
+<div class="form-group">
+	<label class="control-label col-md-3 col-sm-3 col-xs-12" for="SurveyRef">{{res.string.survey_ref}}</label>
+		<div class="col-md-6 col-sm-6 col-xs-12">
+			<div {% if Survey %}style="display:none"{% endif %} class="input-wrap">
+				<input type="text" placeholder="{{ res.string.survey_ref }}" id="SurveyRef" value="{{ Survey?Survey.SurveyRef:res.query_params.ref }}" name="SurveyRef"  class="form-control  col-md-7 col-xs-12">
+			</div>
+			{% if Survey %}
+			<a href="/index.php/back/admin/manage_surveys/get_ref/{{Survey.SurveyRef}}" class="control-value">{{ Survey.SurveyRef  }}</a>
+			{% endif %}
+		</div>
+</div>
+
+	</div>
+	<div class="col-sm-6">
+<div class="form-group">
+	<label class="control-label col-md-3 col-sm-3 col-xs-12" for="SurveyDate">{{res.string.survey_date}}</label>
+	<div class="col-md-6 col-sm-6 col-xs-12">
+		<div {% if Survey %}style="display:none"{% endif %} class="input-wrap">
+			<input type="text" placeholder="{{ res.string.survey_date }}" id="SurveyDate" value="{{ Survey.SurveyDate  | date('Y/m/d') }}" name="SurveyDate" required="required" class="form-control input-date col-md-7 col-xs-12">
+		</div>
+		{% if Survey %}
+			<p class="control-value">{{ Survey.SurveyDate  | date('d M Y')  }}</p>
+		{% endif %}
+	</div>
+</div>
+
+</div>
+</div>

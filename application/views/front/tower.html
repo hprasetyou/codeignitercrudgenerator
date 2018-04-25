@@ -1,0 +1,17 @@
+{% extends "home.html" %} {% block content %}
+<div class="panel">
+
+  <div class="panel-heading">
+    <h4>Peta Persebaran Menara</h4>
+  </div>
+  <div class="panel-body" style="padding-bottom:0px">
+    <div class="row">
+      <div class="col-sm-12 tower-map " id="map_area" style="height:400px"></div>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block bottom %}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLAUAl9I8nQgR3ogoTRGb-guPc_UhuMZ0&callback=initMap" async defer></script>
+
+<script type="text/javascript" src="/public/assets/front_tower.js"></script>
+{% endblock %}

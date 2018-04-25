@@ -1,0 +1,88 @@
+
+{% extends "dashboard.html" %}
+{% set title=" Retribution " %}
+{% if retributions %}
+	 {% set bc_text = retributions.id  %}
+{% else %}
+	 {% set bc_text = res.string.new %}
+{% endif %}
+{% set breadcrumbs = [
+	{'link': base_url~'index.php/manage_retributions','text': res.string.retribution },
+	{'link':'#','text':bc_text  }]
+%}
+{% block content %}
+<div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<form id="form_Retribution" method="post" action="/index.php/manage_retributions/write/{{ Retribution.id }}" data-parsley-validate class="form-horizontal form-label-left">
+			<div class="box box-info">
+				<div class="box-header with-border">
+				{% include 'common/_form_header.html'
+				with {'back_url':'/index.php/manage_retributions'~back_link,
+				'title': res.string.retribution,
+				'delete_url':'/index.php/manage_retributions/delete/' ~ retributions.Id,
+				'object':retributions} %}
+				</div>
+				<div class="box-body">
+					
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Name">{{res.string.name}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if retributions %}style="display:none"{% endif %} class="input-wrap">
+							<input type="text" placeholder="{{ res.string.name }}" id="Name" value="{{ Retribution.Name }}"
+							name="Name" required="required" class="form-control  col-md-7 col-xs-12">
+						</div>
+								{% if retributions %}
+									<p class="control-value">{{ retributions.Name  }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="PaymentDate">{{res.string.payment_date}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if retributions %}style="display:none"{% endif %} class="input-wrap">
+							<input type="text" placeholder="{{ res.string.payment_date }}" id="PaymentDate" value="{{ Retribution.PaymentDate  | date('Y/m/d') }}"
+							name="PaymentDate"  class="form-control input-date col-md-7 col-xs-12">
+						</div>
+								{% if retributions %}
+									<p class="control-value">{{ retributions.PaymentDate  | date('d M Y')  }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="PaymentAmount">{{res.string.payment_amount}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if retributions %}style="display:none"{% endif %} class="input-wrap">
+							<input type="number" placeholder="{{ res.string.payment_amount }}" id="PaymentAmount" value="{{ Retribution.PaymentAmount }}"
+							name="PaymentAmount"  class="form-control  col-md-7 col-xs-12">
+						</div>
+								{% if retributions %}
+									<p class="control-value">{{ retributions.PaymentAmount  }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="TowerId">{{res.string.tower_id}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if retributions %}style="display:none"{% endif %} class="input-wrap">
+							<input type="number" placeholder="{{ res.string.tower_id }}" id="TowerId" value="{{ Retribution.TowerId }}"
+							name="TowerId" required="required" class="form-control  col-md-7 col-xs-12">
+						</div>
+								{% if retributions %}
+									<p class="control-value">{{ retributions.TowerId  }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+				</div>
+		</form>
+	</div>
+</div>
+<!-- Modal -->
+
+{% endblock %}
+{% block bottom%}
+
+{% endblock %}

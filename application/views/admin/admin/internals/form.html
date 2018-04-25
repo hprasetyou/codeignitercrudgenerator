@@ -1,0 +1,118 @@
+
+{% extends "dashboard.html" %}
+{% set title=" Internal " %}
+{% if Internal %}
+	 {% set bc_text = Internal.id  %}
+{% else %}
+	 {% set bc_text = res.string.new %}
+{% endif %}
+{% set breadcrumbs = [
+	{'link': base_url~'index.php/back/admin/manage_internals','text': res.string.internal },
+	{'link':'#','text':bc_text  }]
+%}
+{% block content %}
+<div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<form id="form_Internal" method="post" action="/index.php/back/admin/manage_internals/write/{{ Internal.id }}" data-parsley-validate class="form-horizontal form-label-left">
+			<div class="box box-info">
+				<div class="box-header with-border">
+				{% include 'common/_form_header.html'
+				with {'back_url':'/index.php/back/admin/manage_internals'~back_link,
+				'title': res.string.partner,
+				'delete_url':'/index.php/back/admin/manage_internals/delete/' ~ Internal.Id,
+				'object':Internal} %}
+				</div>
+				<div class="box-body">
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="IdNumber">{{res.string.nip}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if Internal %}style="display:none"{% endif %} class="input-wrap">
+							<input type="text" placeholder="{{ res.string.nip }}" id="IdNumber" value="{{ Internal.IdNumber }}"
+							name="IdNumber"  class="form-control  col-md-7 col-xs-12">
+						</div>
+								{% if Internal %}
+									<p class="control-value">{{ Internal.IdNumber  }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+						<input type="hidden" placeholder="{{ res.string.id_type }}" id="IdType" value="NIP"
+						name="IdType"  class="form-control  col-md-7 col-xs-12">
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Name">{{res.string.name}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if Internal %}style="display:none"{% endif %} class="input-wrap">
+							<input type="text" placeholder="{{ res.string.name }}" id="Name" value="{{ Internal.Name }}"
+							name="Name" required="required" class="form-control  col-md-7 col-xs-12">
+						</div>
+								{% if Internal %}
+									<p class="control-value">{{ Internal.Name  }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Email">{{res.string.email}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if Internal %}style="display:none"{% endif %} class="input-wrap">
+							<input type="text" placeholder="{{ res.string.email }}" id="Email" value="{{ Internal.Email }}"
+							name="Email"  class="form-control  col-md-7 col-xs-12">
+						</div>
+								{% if Internal %}
+									<p class="control-value">{{ Internal.Email  }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Phone">{{res.string.phone}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if Internal %}style="display:none"{% endif %} class="input-wrap">
+							<input type="text" placeholder="{{ res.string.phone }}" id="Phone" value="{{ Internal.Phone }}"
+							name="Phone"  class="form-control  col-md-7 col-xs-12">
+						</div>
+								{% if Internal %}
+									<p class="control-value">{{ Internal.Phone  }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Address">{{res.string.address}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if Internal %}style="display:none"{% endif %} class="input-wrap">
+							<input type="text" placeholder="{{ res.string.address }}" id="Address" value="{{ Internal.Address }}"
+							name="Address"  class="form-control  col-md-7 col-xs-12">
+						</div>
+								{% if Internal %}
+									<p class="control-value">{{ Internal.Address  }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Remark">{{res.string.position}}</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div {% if Internal %}style="display:none"{% endif %} class="input-wrap">
+							<input type="text" placeholder="{{ res.string.position }}" id="Remark" value="{{ Internal.Remark }}"
+							name="Remark"  class="form-control  col-md-7 col-xs-12">
+						</div>
+								{% if Internal %}
+									<p class="control-value">{{ Internal.Remark  }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+
+				</div>
+		</form>
+	</div>
+</div>
+<!-- Modal -->
+
+{% endblock %}
+{% block bottom%}
+
+{% endblock %}
